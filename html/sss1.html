@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>TEST教程</title>
+
+        <style>
+            *{
+                box-sizing: border-box;
+            }
+
+            body{
+                margin: 0;
+            }
+            
+            .header{
+
+                background-color: #2196F3;
+                color: white;
+                text-align: center;
+                padding: 15px;
+            }
+
+            .footer{
+                background-color: #444;
+                color: white;
+                padding: 15px;
+            }
+
+            .topmenu{
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #777;
+            }
+
+            .topmenu li{
+                float: left;
+            }
+
+            .topmenu li a{
+                display: inline-block;
+                color: white;
+                text-align: center;
+                padding: 16px;
+                text-decoration: none;
+            }
+
+            .topmenu li a:hover{
+                background-color: #222;
+            }
+
+            .topmenu li a:active{
+                color: white;
+                background-color: #4caf50  ;
+            }
+
+            .colume{
+                float: left;
+                padding: 15px;
+            }
+
+            .clearfix::after{
+                content: "";
+                clear: both;
+                display: table;
+            }
+
+            .sidemenu{
+                width: 25%
+            }
+
+            .content{
+                width: 75%;
+            }
+
+            .sidemenu ul{
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .sidemenu li a{
+                margin-bottom: 4px;
+
+                display: block;
+                padding: 8px;
+                background-color: #eee;
+                text-decoration: none;
+                color: #666;
+
+            }
+
+
+            .sidemenu li a:hover{
+                background-color: #555;
+                color: white;
+            }
+
+            .sidemenu li a.active{
+                background-color: #008CBA;
+                color: white;
+            }
+
+
+
+
+
+        </style>
+
+
+
+    </head>
+    <body>
+
+        <ul class="topmenu">
+            <li><a href="#" class="active">首页</a></li>
+            <li><a href="#">新闻</a></li>
+            <li><a href="#">关于</a></li>
+            <li><a href="#">联系</a></li>
+        </ul>
+
+        <div class="clearfix">
+            <div class="colume sidemenu">
+                <ul>
+                    <li><a href="#">航班</a></li>
+
+                    <li><a href="#" class="active">城市</a></li>
+
+                    <li><a href="#">机场</a></li>
+
+                    <li><a href="#">酒店</a></li>
+
+                    <li><a href="#">景点</a></li>
+
+                    <li><a href="#">租车</a></li>
+                </ul>
+            </div>
+
+            <div class="colume content">
+                <div class="header">
+                    <h1>城市</h1>
+                </div>
+                <h1>南京</h1>
+                <p>
+                    南京市，简称“宁”，古称金陵、建康 [1]，江苏省辖地级市、省会、副省级市、特大城市 [332]、南京都市圈核心城市 [2]，国务院批复确定的中国东部地区重要的中心城市、全国重要的科研教育基地和综合交通枢纽 [3]。
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Copyright © 2018 TEST. All rights reserved.</p>
+        </div>
+
+
+
+
+
+
+
+    </body>
+</html>

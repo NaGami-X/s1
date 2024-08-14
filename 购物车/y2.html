@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- 兼容移动设备，设置视口宽度等于设备宽度，设置初始缩放比例为1.0 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="inputnumber.css">
+        <title>购物车</title>
+    </head>
+    <body>
+    <div class="app-container" id="app">
+        <!-- 顶部banner -->
+        <div class="banner-box"><img src="./wifi/10.jpg" alt="fruit"></div>
+        <!-- 面包屑导航 -->
+        <div class="breadcrumb">
+            <span>🏠</span>
+            /
+            <span>购物车</span>                
+        </div>
+        <!-- 购物车列表 -->
+        <!-- v-if v-else 条件渲染，如果没有数据则显示空车 -->
+        <div v-if="cartList.length > 0" class="main">
+            <div class="table">
+                <!-- 表头 -->
+                <div class="thead">
+                    <div class="tr">
+                        <div class="th">选中</div>
+                        <div class="th th-pic">角色</div>
+                        <div class="th">名字</div>
+                        <div class="th">攻击力</div>
+                        <div class="th num-th">暴击率(%)</div>
+                        <div class="th">暴击伤害(%)</div>
+                        <div class="th">期望伤害</div>
+                        <div class="th">操作</div>
+                    </div>
+                </div>
+                <!-- 身体 -->
+                <!-- v-for 循环遍历渲染数组 -->
+                <div  class="tbody">
+                    <!-- v-bind 绑定class设置条件 -->
+                    <div class="tr" :class="{active: item.checked}" v-for="(item, index) in cartList" :key="item.id">
+                        <!-- v-model 绑定属性 -->
+                        <div class="td"><input type="checkbox" v-model="item.checked"></div>
+                        <!-- v-bind 绑定src -->
+                        <div class="td td-pic"><img :src="item.pic" alt="fruit"></div>
+                        <div class="td">{{item.name}}</div>
+                        <div class="td">{{item.attract}}</div>
+                        <div class="td">
+                            <div class="my-input-number">
+                                <!-- @click点击实现数量加减 -->
+                                <!-- disabled 是一个动态属性绑定，允许你根据表达式的结果动态设置HTML元素的属性。 -->
+                                <button @click="reduceCount(index)" :disabled="item.count <= 1" class="decrease"> - </button>
+                                <span class="my-input__inner">{{item.count}}</span>
+                                <button @click="addCount(index)" class="increase"> + </button>
+                            </div>
+                            <div class="my-input-number">
+                                <!-- @click点击实现数量加减 -->
+                                <!-- disabled 是一个动态属性绑定，允许你根据表达式的结果动态设置HTML元素的属性。 -->
+                                <button @click="reduceCount2(index)" :disabled="item.count2 <= 1" class="decrease"> - </button>
+                                <span class="my-input__inner">{{item.count2}}</span>
+                                <button @click="addCount2(index)" class="increase"> + </button>
+                            </div>
+                        </div>
+                        <div class="td">{{item.attract * item.count * (100+item.count2) * 0.0001}}</div>
+                        <div @click="del(item.id)" class="td"><button>删除</button></div>
+                    </div>
+                </div>
+            </div>
+            <!-- 底部 -->
+            <div class="bottom">
+                <!-- 全选 -->
+                <label class="checkedall">
+                    <!-- v-model 绑定计算属性，实现全选功能 -->
+                    <input type="checkbox" v-model="allChecked">全选
+                </label>
+                <div class="right-box">
+                    <!-- 所有角色的期望攻击力之和 -->
+                    <span class="total-attack">总战力：{{totalAttack}}</span>
+                    <!-- 结算按钮 -->
+                    <button class="pay">结算</button>
+                </div>
+            </div>
+        </div>
+        <!-- 空车 -->
+        <div v-else class="empty">🛒空空如也</div>
+    </div>
+    <script src="https://cdn.staticfile.net/vue/2.2.2/vue.min.js"></script>
+    <script>
+        const defultArr = [
+            {
+                id: 1,
+                attract: 1000,
+                count: 50,
+                count2: 50,
+                checked: true,
+                name:"流萤",
+                pic: './wifi/1.jpg'
+            },
+            {
+                id: 2,
+                attract: 2000,
+                count: 60,
+                count2: 60,
+                checked: false,
+                name:"芙宁娜",
+                pic: './wifi/2.jpg'
+            },
+            {
+                id: 3,
+                attract: 3000,
+                count: 70,
+                count2: 70,
+                checked: false,
+                name:"三月七",
+                pic: './wifi/3.jpg'
+            },
+            {
+                id: 4,
+                attract: 4000,
+                count: 80,
+                count2: 80,
+                checked: false,
+                name:"镜流",
+                pic: './wifi/4.jpg'
+            },
+            {
+                id: 5,
+                attract: 5000,
+                count: 70,
+                count2: 70,
+                checked: false,
+                name:"银狼",
+                pic: './wifi/5.jpg'
+            },
+            {
+                id: 6,
+                attract: 6000,
+                count: 60,
+                count2: 60,
+                checked: false,
+                name:"绮良良",
+                pic: './wifi/6.jpg'
+            },
+            {
+                id: 7,
+                attract: 7000,
+                count: 50,
+                count2: 50,
+                checked: false,
+                name:"瑶瑶",
+                pic: './wifi/7.jpg'
+            },
+            {
+                id: 8,
+                attract: 8000,
+                count: 40,
+                count2: 40,
+                checked: false,
+                name:"妮露",
+                pic: './wifi/8.jpg'
+            },
+        ]
+        const app = new Vue({
+            el: '#app',
+            data: {
+                // localStorge.getItem 是 Web Storage API 的一个方法，用来获取本地存储名为‘cartList’的存储数据
+                // JSON.parse 函数用于将JSON格式的字符串转换成JavaScript对象。如果从 localStorage 获取的是有效字符串，将被转换为对应的JavaScript对象。
+                // ||是逻辑计算符，如果左侧结果为null，则返回右侧结果。
+                cartList: JSON.parse(localStorage.getItem('tList')) || defultArr,
+
+            },
+            computed:{
+                // 计算属性，计算所有角色的期望攻击力之和
+                allChecked:{
+                    // get 用于获取
+                    get(){
+                        return this.cartList.every(item => item.checked)
+                    },
+                    // set 用于设置
+                    set(value){
+                        // 点击按钮时先判断
+                        // some() 方法实现如果有任意一个按钮不是true，则全选，反之取消所有选择
+                        this.cartList.forEach(item => item.checked = value)
+                    }
+                },
+                totalcount(){
+                    return this.cartList.reduce((sum,item) => {
+                        // 判断实现选中状态再添加
+                        if (item.checked === true) {
+                            return sum + item.num
+                        } else {
+                            // 没选中则不添加
+                            return sum
+                        }
+                    },0)
+                },
+                totalAttack(){
+                    return this.cartList.reduce((sum,item) => {
+                        // 判断实现选中状态再添加
+                        if (item.checked === true) {
+                            return sum + (item.attract * item.count * (100+item.count2) * 0.0001)
+                        } else {
+                            // 没选中则不添加
+                            return sum
+                        }
+                    },0)
+                },     
+            },
+        methods: {
+
+            reduceCount(index) {
+                if (this.cartList[index].count > 1) {
+                    this.cartList[index].count--;
+                }
+            },
+            addCount(index) {
+                this.cartList[index].count++;
+            },
+            reduceCount2(index) {
+                if (this.cartList[index].count2 > 1) {
+                    this.cartList[index].count2--;
+                }
+            },
+            addCount2(index) {
+                this.cartList[index].count2++;
+            },
+            del (id) {
+                // 点击删除按钮时，将对应id的对象从数组中移除
+                this.cartList = this.cartList.filter(item => item.id !== id)
+            },
+                // 重新渲染页面
+            updateLocalStorage() {
+                localStorage.setItem('cartList', JSON.stringify(this.cartList));
+            }
+        },
+        // 使用watch监听cartList数组的变化，将数组存储到localStorage，实现持久化
+        watch:{
+            // 监听cartList数组的变化，将数组存储到localStorage
+            cartList:{
+                deep: true,
+                handler(newValue){
+                    this.$nextTick(() => {
+                        localStorage.setItem('tList', JSON.stringify(newValue));
+                    });
+                }
+            }
+        }
+    })
+
+
+    </script>
+
+
+    </body>
+
+</html>

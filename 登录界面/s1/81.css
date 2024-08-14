@@ -1,0 +1,198 @@
+*{
+    /* 初始化样式 */
+    margin:0;
+    padding:0;
+}
+
+body{
+    /* 100%窗口高度 */
+    height: 100vh;
+    /* 弹性布局 */
+    display:flex;
+    /* 水平垂直居中 */
+    justify-content: center;
+    align-items: center;
+    /* 使用了图片作为背景 */
+    background-image:url('03.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container{
+    background-color: #fff;
+    width: 650px;
+    height: 415px;
+    border-radius: 10px;
+    /* 阴影 */
+    box-shadow:10px 10px 10px rgba(0,0,0,0.1);
+    /* 相对定位 */
+    position:relative;
+}
+
+.form-box{
+    /* 绝对定位 */
+    position: absolute;
+    top: -10%;
+    left: 5%;
+    background-color: #CCE8CF;
+    width: 320px;
+    height: 500px;
+    border-radius: 10px;
+    /* 阴影 */
+    box-shadow:4px 0px 20px rgba(0,0,0,0.1);
+    /* 相对定位 */
+    display: flex;
+    /* 居中 */
+    justify-content: center;
+    align-items: center;
+    /* 设置层级为2 */
+    z-index: 2;
+    /* 动画过渡 加速后减速 */
+    transition: 1s ease-in-out
+}
+
+.register-box, .login-box{
+    /* 弹性布局 垂直排列 居中布置*/
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.hidden{
+    display: none;
+    transition: 1s;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 22px;
+    /* 大写 */
+    text-transform: uppercase;
+    color: black;
+    /* 字间距 */
+    letter-spacing: 5px;
+}
+
+input{
+    /* 让文本框颜色变透明 */
+    background-color: transparent;
+    width: 70%;
+    color: #fff;
+    border: none;
+    /* 下边框样式 */
+    border-bottom: 2px solid #000;
+    /* 内边距 上下边距10 左右0 */
+    padding: 10px 0;
+    /* 文本缩进 */
+    text-indent: 10px;
+    /* 外边距 上下8 左右0 */
+    margin: 8px 0;
+    /* 字体大小 */
+    font-size: 14px;
+    /* 字符间距 */
+    letter-spacing: 2px;
+}
+/* placeholder的字体颜色 */
+input::placeholder{
+    color: #fff;
+}
+/* 选中后的变化 */
+input:focus{
+    color:#fff;
+    outline: none;
+    border-bottom: 2px solid #fff;
+    transition: 0.5s;
+}
+/* 选中后placeholder的颜色 透明*/
+input:focus::placeholder{
+    opacity: 0;
+}
+/* 滑动栏内按钮变化 */
+.form-box button{
+    width: 70%;
+    margin-top:35px;
+    background-color: #f6f6f6;
+    outline: none;
+    border-radius: 8px;
+    padding: 13px;
+    color: #eb7f33;
+    border:none;
+    cursor: pointer;
+}
+
+.form-box button:hover{
+    background-color: #fa907e;
+    color: #f6f6f6;
+    transition: background-color 0.5s, ease;
+}
+/* 固定栏内文字按钮图片规则 */
+.con-box{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    transform:translateY(-50%);
+}
+
+.con-box.left{
+    left: -2%;
+}
+
+.con-box.right{
+    right: -2%;
+}
+
+
+.con-box h2{
+    color:#8e9aaf;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.con-box p{
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #8e9aaf;
+    text-align: center;
+}
+
+.con-box span{
+    color:#d3b7d8;
+}
+
+.con-box img{
+    width: 50%;
+    height: 50%;
+    opacity: 0.9;
+    margin: 40px 0;
+}
+
+.con-box button{
+    margin-top: 3%;
+    background-color: #f6f6f6;
+    color:#a262ad;
+    border:1px solid #d3b7d8;
+    padding: 6px 10px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    outline: none;
+    cursor: pointer;
+}
+
+.con-box button:hover{
+    background-color: #d3b7d8;
+    color: #f6f6f6;
+}
+
+
+
+
+

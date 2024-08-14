@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+
+
+<style>
+  *{
+    margin:0;
+    padding:0;
+    background-color: #f0f0f0;
+  }
+  .todo-list{
+    background-color: red !important;
+    width: 98%;
+    list-style: none;
+    line-height:35px;
+    border-top:0.5px solid #E0e0e0;
+    border-bottom:0.5px solid #E0e0e0;
+    border-left:1px solid #E0e0e0;
+    border-right:1px solid #E0e0e0;
+  }
+
+
+</style>
+
+
+<script src="https://cdn.staticfile.net/vue/2.2.2/vue.min.js"></script>
+
+
+</head>
+<body>
+  <section id="app">
+<header class="header">
+  <h1>记事本</h1>
+  <input type="text" placeholder="输入任务" class="new-todo"/>
+  <button class="add-todo">添加</button>
+</header>
+<section class="main">
+  <ul class="todo-list">
+    <li class="todo" v-for="(item,index) in List" :key="item.id">
+      <div class="view">
+        <span class="index">{{index+1}}.</span>
+        <label>{{item.name}}</label>
+        <button @click="del(item.id)" class="destory"></button>
+      </div>
+    </li>
+
+  </ul>
+</section>
+<footer class="footer">
+  <span class="todo-count">
+    <strong>{{List.length}}</strong> 项待办
+  </span>
+
+  <button class="clear-completed">清除已完成</button>
+</footer>
+</section>
+
+<footer class="info"></footer>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      List:[
+        {id:1, name:'跑步'},
+        {id:2, name:'打羽毛球'},
+        {id:3, name:'游泳'},
+
+      ]
+    },
+    methods:{
+      add:function(){
+        this.list.push({id:this.list.length+1,name:this.newTodo})
+      },
+      del:function(id){
+        this.list=this.list.filter(item=>item.id!==id)
+      },
+      clear:function(){
+        this.list=[]
+    }
+  }
+  })
+
+
+</script>
+</body>
+</html>
